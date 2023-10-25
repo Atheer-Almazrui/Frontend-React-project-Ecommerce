@@ -1,4 +1,12 @@
-@tailwind base;
+body {
+  margin: 0px;
+  padding: 0px;
+  border: 0px;
+  background-color: rgb(240, 240, 240);
+}
+
+
+/* @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
@@ -70,4 +78,4 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
-}
+} */

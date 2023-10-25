@@ -23,6 +23,7 @@ export function NewProductWrapper() {
     const { name, value } = e.target
 
     const isList = name === 'categories' || name === 'variants' || name === 'sizes'
+
     if (isList) {
       setProduct({
         ...product,
@@ -52,7 +53,7 @@ export function NewProductWrapper() {
 
   return (
     <div>
-      <h3 className="text-2xl font-bold">Add a new product</h3>
+      <h1 className="text-2xl font-bold">Add a new product</h1>
       <ProductForm handleSubmit={handleSubmit} handleChange={handleChange} product={product} />
     </div>
   )

@@ -9,7 +9,7 @@ type ProductFormProps = {
 
 export function ProductForm({ product, handleSubmit, handleChange }: ProductFormProps) {
   const inputStyle =
-    'w-full px-3 py-2 text-white border rounded-lg focus:outline-none focus:border-blue-400'
+    'w-full px-3 py-2 text-black border rounded-lg focus:outline-none focus:border-blue-400'
   const labelStyle = 'block text-sm font-medium text-gray-600'
 
   return (
@@ -88,7 +88,7 @@ export function ProductForm({ product, handleSubmit, handleChange }: ProductForm
           id="sizes"
           value={product.sizes.join(',')}
           onChange={handleChange}
-          className="w-full px-3 py-2 text-white border rounded-lg focus:outline-none focus:border-blue-400"
+          className="w-full px-3 py-2 text-black border rounded-lg focus:outline-none focus:border-blue-400"
         />
       </div>
       <button
