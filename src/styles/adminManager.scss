@@ -1,0 +1,90 @@
+ .product-form {
+    padding: 2rem;
+  }
+
+  .product-form__group {
+    margin-bottom: 1rem;
+  }
+
+  .product-form__label {
+    font-weight: bold;
+  }
+
+  .product-form__input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #000;
+    border-radius: 0.25rem;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .product-form__input:focus {
+    border-color: #007bff;
+  }
+
+  .product-form__input--wide {
+    width: 100%;
+  }
+
+  .product-form__button {
+    width: 100%;
+    padding: 0.5rem 1rem;
+    color: #fff;
+    background-color: #007bff;
+    border-radius: 0.25rem;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+
+  .product-form__button--primary:hover {
+    background-color: #0069d9;
+  }
+
+  ///////////////////////////////////////// for Products
+  
+    .product-grid {
+    display: grid;
+  }
+
+  .product-grid--columns-1 {
+    grid-template-columns: 1fr;
+  }
+
+  .product-grid--columns-md-2 {
+    @media (min-width: 768px) {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .product-grid--full-width {
+    width: 100%;
+  }
+
+
+  .product-card--grid {
+    gap: 1rem;
+  }
+
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  .product-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .product-item__image {
+    width: 50px;
+  }
+
+  .product-item__delete-button {
+    color: #ff0000;
+    font-size: 0.75rem;
+  }

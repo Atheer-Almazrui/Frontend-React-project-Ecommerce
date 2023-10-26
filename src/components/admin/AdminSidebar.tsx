@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom'
-import '../styles/sidebar.scss'
+import '../../styles/sidebar.scss'
 
 const AdminSidebar = () => {
   return (
-    <div className="sidebar-body">
+    <aside className="sidebar-body">
       <nav className="menu" tabIndex={0}>
         <div className="smartphone-menu-trigger"></div>
         <header className="avatar">
@@ -27,17 +27,17 @@ const AdminSidebar = () => {
             </Link>
           </li>
           <li tabIndex={0} className="icon-users">
-            <Link className="span" to="/">
+            <Link className="span" to="/dashboard/admin/userslist">
               Users
             </Link>
           </li>
         </ul>
       </nav>
 
-      <main className="main">
+      {/* <main className="main">
         <div className="helper"></div>
-      </main>
-    </div>
+      </main> */}
+    </aside>
   )
 }
 

@@ -11,21 +11,24 @@ $icon-url-categories: 'https://img.icons8.com/ios-glyphs/30/category.png';
 
 .container {
   display: flex;
-  justify-content: flex-end;
-  align-items: center;
+}
+
+.main-content {
+  background-color: antiquewhite;
+  padding: 1em;
 }
 
 .sidebar-body {
   margin: 0;
-  font-family: 'Open Sans', Helvetica Neue, Helvetica, Arial, sans-serif;
   color: #000;
   padding-left: $menu-width-desktop;
+  
 }
 
-.main {
-  position: relative;
-  height: 100vh;
-
+// .main {
+//   position: relative;
+//   height: 100vh;
+  
 //   .helper {
 //     background: rgba(0, 0, 0, 0.2);
 //     color: $color-1st;
@@ -46,7 +49,7 @@ $icon-url-categories: 'https://img.icons8.com/ios-glyphs/30/category.png';
 //       display: block;
 //     }
 //   }
-}
+// }
 
 .menu {
   background: $color-2nd;
@@ -121,6 +124,9 @@ $icon-url-categories: 'https://img.icons8.com/ios-glyphs/30/category.png';
   body {
     padding-left: $menu-width-tablet;
   }
+  .sidebar-body {
+     padding-left: $menu-width-tablet; ///////////////////////////////
+  }
   .menu {
     width: $menu-width-tablet;
 
@@ -154,7 +160,7 @@ $icon-url-categories: 'https://img.icons8.com/ios-glyphs/30/category.png';
 
     ul {
       li {
-        height: $menu-width-tablet/1.5;
+        height: calc($menu-width-tablet / 1.5);
         background-position: center center;
         background-size: 30px auto;
         position: relative;

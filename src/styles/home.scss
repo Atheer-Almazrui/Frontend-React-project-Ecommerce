@@ -1,0 +1,109 @@
+.grid-container {
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 1.25em;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(18.75rem, 1fr));
+  gap: 1.5rem;
+}
+
+.card {
+  border: 1px solid #ccc;
+  background-color: #fff;
+  border-radius: 0.5rem;
+  padding: 1.25em;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.card img {
+  width: 10rem;
+  height: auto;
+  display: block;
+  margin: 0 auto 0.625em;
+}
+
+.card h3 {
+  margin-top: 0;
+}
+
+.card p {
+  margin-bottom: 0.625em;
+}
+
+.card button {
+  display: block;
+  margin-top: 0.625em;
+  padding: 0.625em 1.25em;
+  background-color: #000000;
+  color: #fff;
+  font-size: 0.9rem;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+
+.card button:hover {
+  border: #ff4081;
+  color: #ff4081;
+  border-width: 3px;
+  border-style: solid;
+}
+
+.link {
+  text-decoration: none;
+  color: #000000;
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 0.5rem;
+}
+
+input[type='text'] {
+  /* width: 97%; */
+  padding: 10px;
+  margin-bottom: 20px;
+  font-size: 14px;
+  border-radius: 15px;
+  flex: 1;
+  border: none;
+}
+
+input[type='text']::placeholder {
+  color: #747272;
+  font-weight: bold;
+  font-size: 14px;
+  font-family: 'Lato', sans-serif;
+}
+
+select {
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 15px;
+  background-color: #fff;
+  border: none;
+  font-size: 14px;
+  color: #333;
+  font-family: 'Lato', sans-serif;
+}
+
+select option {
+  font-size: 14px;
+  color: #333;
+  font-family: 'Lato', sans-serif;
+}
+
+select:hover {
+  color: rgba(48, 142, 243, 0.945);
+}
+

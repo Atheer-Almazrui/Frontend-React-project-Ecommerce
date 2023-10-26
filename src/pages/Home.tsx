@@ -1,59 +1,85 @@
-import { Grid, Card, CardContent, Typography, Button, Box, Container } from '@mui/material'
-import { useEffect } from 'react'
+import { ChangeEvent, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { productsRequest, productsSuccess } from '../redux/slices/products/productSlice'
-import api from '../api'
+import {
+  Product,
+  fetchProducts,
+  searchProductByName,
+  sortProducts
+} from '../redux/slices/products/productSlice'
 import { AppDispatch, RootState } from '../redux/store'
-// import { theme } from '../theme'
-// import { ThemeProvider } from '@emotion/react/types/theming'
+import HeroSection from '../components/HeroSection'
+import '../styles/home.scss'
+import { Link } from 'react-router-dom'
 
 const Home = () => {
   const dispatch = useDispatch<AppDispatch>()
-  const state = useSelector((state: RootState) => state)
-  const products = state.products
+  const { searchWord, products, isLoading, error } = useSelector(
+    (state: RootState) => state.products
+  )
 
   useEffect(() => {
-    handleGetProducts()
+    dispatch(fetchProducts())
   }, [])
 
-  /**
-   * If you want to keep things simple you can follow this approach on updating
-   * redux state when using async requests instead of using createAsyncThunk
-   */
-  const handleGetProducts = async () => {
-    // let's first turn the loader to true so we can have a better UX
-    dispatch(productsRequest())
+  if (isLoading) {
+    return <h1>Products are loading...</h1>
+  }
+  if (error) {
+    return <h1>{error}</h1>
+  }
 
-    // Fetching from the local files
-    const res = await api.get('/mock/e-commerce/products.json')
-    // At this point we have the data so let's update the store
-    dispatch(productsSuccess(res.data))
+  const handleSearch = (event: ChangeEvent<HTMLInputElement>) => {
+    const searchTerm = event.target.value
+    dispatch(searchProductByName(searchTerm))
+  }
+
+  const searchedProducts = searchWord
+    ? products.filter(
+        (product) => product.name.toLowerCase().startsWith(searchWord.toLowerCase()) === true
+      )
+    : products
+
+  const handleSort = (event: ChangeEvent<HTMLSelectElement>) => {
+    const sortedType = event.target.value
+    dispatch(sortProducts(sortedType))
   }
 
   return (
-    <Container>
-      <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 10 }}>
-        {products.items.map((product) => (
-          <Grid item xs={12} sm={6} md={3} my={5} key={product.id}>
-            <Card>
-              <Box p={3}>
-                <CardContent>
-                  <Typography variant="h6">{product.name}</Typography>
-                  <img src={product.image} alt={product.name} style={{ width: '50%' }} />
-                  <Typography variant="body2">{product.description}</Typography>
-                  <Typography variant="subtitle1">Price: $1000</Typography>
-                </CardContent>
-
-                <Button variant="contained" color="primary">
-                  Add to Cart
-                </Button>
-              </Box>
-            </Card>
-          </Grid>
-        ))}
-      </Grid>
-    </Container>
+    <div>
+      <HeroSection />
+      <div className="grid-container">
+        <div className="search-container">
+          <input
+            type="text"
+            placeholder="🔎  Discover Amazing Products.."
+            value={searchWord}
+            onChange={handleSearch}
+          />
+          <select name="sort" id="sort" onChange={handleSort}>
+            <option hidden>Sort by</option>
+            <option value="priceASC">Price: Low to High</option>
+            <option value="priceDESC">Price: High to Low</option>
+            <option value="nameASC">Name A to Z</option>
+            <option value="nameDESC">Name Z to A</option>
+          </select>
+        </div>
+        <div className="grid">
+          {searchedProducts.length > 0 &&
+            searchedProducts.map((product: Product) => (
+              <Link to={`/product/${product.id}`} key={product.id} className="link">
+                <div className="card">
+                  <img src={product.image} alt={product.name} />
+                  <h3>{product.name}</h3>
+                  <p>{product.description}</p>
+                  <p>${product.price}</p>
+                  <button>Add to Cart</button>
+                </div>
+              </Link>
+            ))}
+        </div>
+      </div>
+    </div>
   )
 }
 
