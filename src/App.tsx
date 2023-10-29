@@ -1,13 +1,10 @@
-// import { ProductsManager } from './components/ProductsManager'
-import './App.css'
-// import './main'
 import Index from './routes/Index'
+import './App.css'
 
 function App() {
   return (
-    <div className="App">
+    <div>
       <Index />
-      {/* <ProductsManager /> */}
     </div>
   )
 }

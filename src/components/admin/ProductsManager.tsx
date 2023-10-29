@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { fetchProducts, removeProduct } from '../../redux/slices/products/productSlice'
 import { AppDispatch, RootState } from '../../redux/store'
+
 import { NewProductWrapper } from './NewProductWrapper'
 
 export function ProductsManager() {

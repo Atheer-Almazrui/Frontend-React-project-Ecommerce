@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux'
 
 import { addProduct, Product } from '../../redux/slices/products/productSlice'
 import { AppDispatch } from '../../redux/store'
+
 import '../../styles/adminManager.scss'
 
 const initialProductState: Product = {
@@ -12,7 +13,8 @@ const initialProductState: Product = {
   description: '',
   categories: [],
   variants: [],
-  sizes: []
+  sizes: [],
+  price: 0
 }
 
 export function NewProductWrapper() {

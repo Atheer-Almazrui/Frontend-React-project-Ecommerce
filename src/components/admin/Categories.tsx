@@ -1,8 +1,10 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { AppDispatch, RootState } from '../../redux/store'
-import AdminSidebar from './AdminSidebar'
 import { useEffect } from 'react'
+
+import { AppDispatch, RootState } from '../../redux/store'
 import { fetchCategories, removeCategory } from '../../redux/slices/categories/categorySlice'
+
+import AdminSidebar from './AdminSidebar'
 
 const Categories = () => {
   const dispatch = useDispatch<AppDispatch>()

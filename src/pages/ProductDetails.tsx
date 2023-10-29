@@ -1,9 +1,11 @@
 import { useParams } from 'react-router-dom'
-import '../styles/productDetails.scss'
-import { useDispatch, useSelector } from 'react-redux'
-import { AppDispatch, RootState } from '../redux/store'
 import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+
+import { AppDispatch, RootState } from '../redux/store'
 import { findProudctDetails } from '../redux/slices/products/productSlice'
+
+import '../styles/productDetails.scss'
 
 const ProductDetails = () => {
   const { id } = useParams()

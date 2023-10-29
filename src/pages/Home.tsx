@@ -1,5 +1,6 @@
 import { ChangeEvent, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 import {
   Product,
@@ -8,9 +9,9 @@ import {
   sortProducts
 } from '../redux/slices/products/productSlice'
 import { AppDispatch, RootState } from '../redux/store'
+
 import HeroSection from '../components/HeroSection'
 import '../styles/home.scss'
-import { Link } from 'react-router-dom'
 
 const Home = () => {
   const dispatch = useDispatch<AppDispatch>()
@@ -52,7 +53,7 @@ const Home = () => {
         <div className="search-container">
           <input
             type="text"
-            placeholder="🔎 Discover Amazing Products.."
+            placeholder="🔎  Discover Amazing Products.."
             value={searchWord}
             onChange={handleSearch}
           />

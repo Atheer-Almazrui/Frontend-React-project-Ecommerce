@@ -5,8 +5,8 @@ import AdminDashboard from '../pages/admin/AdminDashboard'
 import ProductDetails from '../pages/ProductDetails'
 import Error from '../pages/Error'
 import Contact from '../pages/Contact'
-
 import UserDashboard from '../pages/user/UserDashboard'
+
 import Products from '../components/admin/Products'
 import Header from '../components/Header'
 import Categories from '../components/admin/Categories'

@@ -1,4 +1,5 @@
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+
 import api from '../../../api'
 
 export const fetchCategories = createAsyncThunk('category/fetchCategories', async () => {
