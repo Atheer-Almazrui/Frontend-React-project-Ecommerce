@@ -47,7 +47,7 @@ const ProductDetails = () => {
                   {singleProduct.variants && singleProduct.variants.join(' , ')}
                 </span>
               </div>
-              {singleProduct.sizes && (
+              {singleProduct.sizes.length > 0 && (
                 <>
                   <p>Sizes: </p>
                   <div className="product-sizes">
