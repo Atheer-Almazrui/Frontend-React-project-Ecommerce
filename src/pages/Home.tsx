@@ -52,7 +52,7 @@ const Home = () => {
         <div className="search-container">
           <input
             type="text"
-            placeholder="🔎  Discover Amazing Products.."
+            placeholder="🔎 Discover Amazing Products.."
             value={searchWord}
             onChange={handleSearch}
           />
