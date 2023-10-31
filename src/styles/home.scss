@@ -53,13 +53,9 @@
 .card button:hover {
   border: #ff4081;
   color: #ff4081;
+  background-color: #000000;
   border-width: 3px;
   border-style: solid;
-}
-
-.link {
-  text-decoration: none;
-  color: #000000;
 }
 
 .search-container {
@@ -106,4 +102,3 @@ select option {
 select:hover {
   color: rgba(48, 142, 243, 0.945);
 }
-

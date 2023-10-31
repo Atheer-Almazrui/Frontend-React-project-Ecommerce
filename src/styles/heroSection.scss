@@ -1,7 +1,7 @@
 .hero-section {
   position: relative;
   height: 20rem;
-  margin: 3rem 0rem;
+  margin: 4rem 4rem;
 
   @media (max-width: 768px) {
     height: 100%;
@@ -23,7 +23,7 @@
 .hero-content {
   width: 40rem; 
   text-align: left;
-color: #000;
+
   @media (max-width: 768px) {
     width: 100%;
     text-align: center;

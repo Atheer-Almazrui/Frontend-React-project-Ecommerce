@@ -68,15 +68,15 @@ const Home = () => {
         <div className="grid">
           {searchedProducts.length > 0 &&
             searchedProducts.map((product: Product) => (
-              <Link to={`/product/${product.id}`} key={product.id} className="link">
-                <div className="card">
+              <div className="card" key={product.id}>
+                <Link to={`/product/${product.id}`}>
                   <img src={product.image} alt={product.name} />
-                  <h3>{product.name}</h3>
-                  <p>{product.description}</p>
-                  <p>${product.price}</p>
-                  <button>Add to Cart</button>
-                </div>
-              </Link>
+                </Link>
+                <h3>{product.name}</h3>
+                <p>{product.description}</p>
+                <p>${product.price}</p>
+                <button>Add to Cart</button>
+              </div>
             ))}
         </div>
       </div>

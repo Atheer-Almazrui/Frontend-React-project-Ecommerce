@@ -3,7 +3,8 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { AppDispatch, RootState } from '../redux/store'
-import { findProudctDetails } from '../redux/slices/products/productSlice'
+import { fetchProducts, findProudctDetails } from '../redux/slices/products/productSlice'
+import { fetchCategories } from '../redux/slices/categories/categorySlice'
 
 import '../styles/productDetails.scss'
 
@@ -12,9 +13,12 @@ const ProductDetails = () => {
 
   const dispatch = useDispatch<AppDispatch>()
   const { singleProduct, isLoading, error } = useSelector((state: RootState) => state.products)
+  const { categories } = useSelector((state: RootState) => state.categories)
 
   useEffect(() => {
-    dispatch(findProudctDetails(Number(id)))
+    dispatch(fetchProducts())
+      .then(() => dispatch(findProudctDetails(Number(id))))
+      .then(() => dispatch(fetchCategories()))
   }, [])
 
   if (isLoading) {
@@ -22,6 +26,11 @@ const ProductDetails = () => {
   }
   if (error) {
     return <h1>{error}</h1>
+  }
+
+  const getCategoryName = (categoryId: number) => {
+    const category = categories.find((category) => category.id === categoryId)
+    return category ? category.name : 'category not foumd'
   }
 
   return (
@@ -37,21 +46,31 @@ const ProductDetails = () => {
               <p className="product-description">{singleProduct.description}</p>
               <p>Categories : </p>
               <div className="product-categories">
-                <span className="category">
-                  {singleProduct.categories && singleProduct.categories.join(' , ')}
-                </span>
+                {singleProduct.categories &&
+                  singleProduct.categories.map((categoryId: number) => (
+                    <span className="category" key={categoryId}>
+                      {getCategoryName(categoryId)}
+                    </span>
+                  ))}
               </div>
               <p>Variants : </p>
               <div className="product-variants">
-                <span className="variant">
-                  {singleProduct.variants && singleProduct.variants.join(' , ')}
-                </span>
+                {singleProduct.variants &&
+                  singleProduct.variants.map((variant: string) => (
+                    <span className="variant" key={variant}>
+                      {variant}
+                    </span>
+                  ))}
               </div>
-              {singleProduct.sizes.length > 0 && (
+              {singleProduct.sizes?.length > 0 && (
                 <>
                   <p>Sizes: </p>
                   <div className="product-sizes">
-                    <span className="size">{singleProduct.sizes.join(' , ')}</span>
+                    {singleProduct.sizes.map((size: string) => (
+                      <span className="size" key={size}>
+                        {size}
+                      </span>
+                    ))}
                   </div>
                 </>
               )}

@@ -1,11 +1,12 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import Collapsible from 'react-collapsible'
 
 import { fetchProducts, removeProduct } from '../../redux/slices/products/productSlice'
 import { AppDispatch, RootState } from '../../redux/store'
 
-import { NewProductWrapper } from './NewProductWrapper'
 import AdminSidebar from './AdminSidebar'
+import AdminForm from './AdminForm'
 import '../../styles/adminOperations.scss'
 
 const Products = () => {
@@ -27,7 +28,10 @@ const Products = () => {
     <div className="container">
       <AdminSidebar />
       <div className="form-container">
-        <NewProductWrapper />
+        <Collapsible trigger="Start here">
+          <AdminForm />
+        </Collapsible>
+
         <div className="product-grid">
           {products.map((product) => (
             <div key={product.id} className="product-card">

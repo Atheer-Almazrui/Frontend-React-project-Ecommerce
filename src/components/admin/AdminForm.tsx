@@ -3,7 +3,6 @@ import { useDispatch } from 'react-redux'
 
 import { addProduct, Product } from '../../redux/slices/products/productSlice'
 import { AppDispatch } from '../../redux/store'
-
 import '../../styles/adminForm.scss'
 
 const initialProductState: Product = {
@@ -17,7 +16,7 @@ const initialProductState: Product = {
   price: 0
 }
 
-export function NewProductWrapper() {
+const AdminForm = () => {
   const dispatch = useDispatch<AppDispatch>()
   const [product, setProduct] = useState<Product>(initialProductState)
 
@@ -115,3 +114,5 @@ export function NewProductWrapper() {
     </div>
   )
 }
+
+export default AdminForm
