@@ -73,6 +73,22 @@ export const productSlice = createSlice({
         (product) => product.id !== action.payload.productId
       )
       state.products = filteredItems
+    },
+    updateProduct: (state, action: { payload: { editedProduct: Product } }) => {
+      const { id, name, image, description, categories, variants, sizes, price } =
+        action.payload.editedProduct
+
+      const updatedItem = state.products.find((product) => product.id === id)
+
+      if (updatedItem) {
+        updatedItem.name = name
+        updatedItem.image = image
+        updatedItem.description = description
+        updatedItem.categories = categories
+        updatedItem.variants = variants
+        updatedItem.sizes = sizes
+        updatedItem.price = price
+      }
     }
   },
   extraReducers: (builder) => {
@@ -91,7 +107,13 @@ export const productSlice = createSlice({
       })
   }
 })
-export const { sortProducts, searchProductByName, findProudctDetails, removeProduct, addProduct } =
-  productSlice.actions
+export const {
+  sortProducts,
+  searchProductByName,
+  findProudctDetails,
+  removeProduct,
+  addProduct,
+  updateProduct
+} = productSlice.actions
 
 export default productSlice.reducer

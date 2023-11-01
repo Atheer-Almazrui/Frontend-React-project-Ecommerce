@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useEffect, useState } from 'react'
+import { ChangeEvent, FormEvent, Fragment, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 // import Collapsible from 'react-collapsible'
@@ -11,7 +11,8 @@ import {
   Product,
   addProduct,
   fetchProducts,
-  removeProduct
+  removeProduct,
+  updateProduct
 } from '../../redux/slices/products/productSlice'
 import { AppDispatch, RootState } from '../../redux/store'
 
@@ -32,29 +33,46 @@ const initialProductState: Product = {
 
 const Products = () => {
   const dispatch = useDispatch<AppDispatch>()
+  const [product, setProduct] = useState<Product>(initialProductState)
   const [isAdding, setIsAdding] = useState(false)
+  const [isEditing, setIsEditing] = useState(false)
+  const [editedID, setEditedID] = useState(0)
+  const [editedProduct, setEditedProduct] = useState<Product>(product)
   const [tooltipContent, setTooltipContent] = useState('')
   const { products, isLoading, error } = useSelector((state: RootState) => state.products)
-
-  const [product, setProduct] = useState<Product>(initialProductState)
 
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
 
     const isList = name === 'categories' || name === 'variants' || name === 'sizes'
 
-    if (isList) {
+    if (isEditing) {
+      if (isList) {
+        setEditedProduct({
+          ...editedProduct,
+          [name]: value.split(',')
+        })
+        return
+      }
+
+      setEditedProduct({
+        ...editedProduct,
+        [name]: value
+      })
+    } else {
+      if (isList) {
+        setProduct({
+          ...product,
+          [name]: value.split(',')
+        })
+        return
+      }
+
       setProduct({
         ...product,
-        [name]: value.split(',')
+        [name]: value
       })
-      return
     }
-
-    setProduct({
-      ...product,
-      [name]: value
-    })
   }
 
   useEffect(() => {
@@ -64,6 +82,18 @@ const Products = () => {
   const handleAddClick = () => {
     setIsAdding(true)
   }
+
+  const handleEditClick = (product: Product) => {
+    setEditedProduct(product)
+    setEditedID(product.id)
+    setIsEditing(true)
+  }
+
+  const handleUpdateProduct = () => {
+    dispatch(updateProduct({ editedProduct: editedProduct }))
+    setIsEditing(false)
+  }
+
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
     setIsAdding(false)
@@ -128,7 +158,6 @@ const Products = () => {
                         className="input-field"
                         type="text"
                         name="image"
-                        value={product.image}
                         onChange={handleChange}
                       />
                     </Td>
@@ -137,7 +166,6 @@ const Products = () => {
                         className="input-field"
                         type="text"
                         name="name"
-                        value={product.name}
                         onChange={handleChange}
                       />
                     </Td>
@@ -146,7 +174,6 @@ const Products = () => {
                         className="input-field"
                         type="text"
                         name="description"
-                        value={product.description}
                         onChange={handleChange}
                       />
                     </Td>
@@ -155,7 +182,6 @@ const Products = () => {
                         className="input-field"
                         type="text"
                         name="categories"
-                        value={product.categories.join(',')}
                         onChange={handleChange}
                       />
                     </Td>
@@ -164,7 +190,6 @@ const Products = () => {
                         className="input-field"
                         type="text"
                         name="variants"
-                        value={product.variants.join(',')}
                         onChange={handleChange}
                       />
                     </Td>
@@ -173,7 +198,6 @@ const Products = () => {
                         className="input-field"
                         type="text"
                         name="sizes"
-                        value={product.sizes.join(',')}
                         onChange={handleChange}
                       />
                     </Td>
@@ -182,20 +206,104 @@ const Products = () => {
                         className="input-field"
                         type="text"
                         name="price"
-                        value={product.price}
                         onChange={handleChange}
                       />
                     </Td>
                     <Td>
-                      <button className="add-button" type="submit">
+                      <button className="save-button" type="submit">
                         Save
                       </button>
                     </Td>
                   </Tr>
                 )}
                 {products.map((product) => (
-                  <>
-                    <Tr key={product.id}>
+                  <Fragment key={product.id}>
+                    {isEditing && editedID == product.id && (
+                      <Tr>
+                        <Td>
+                          <input
+                            className="input-field"
+                            type="text"
+                            name="id"
+                            value={editedProduct.id}
+                            onChange={handleChange}
+                            disabled
+                          />
+                        </Td>
+                        <Td>
+                          <input
+                            className="input-field"
+                            type="text"
+                            name="image"
+                            value={editedProduct.image}
+                            onChange={handleChange}
+                          />
+                        </Td>
+                        <Td>
+                          <input
+                            className="input-field"
+                            type="text"
+                            name="name"
+                            value={editedProduct.name}
+                            onChange={handleChange}
+                          />
+                        </Td>
+                        <Td>
+                          <input
+                            className="input-field"
+                            type="text"
+                            name="description"
+                            value={editedProduct.description}
+                            onChange={handleChange}
+                          />
+                        </Td>
+                        <Td>
+                          <input
+                            className="input-field"
+                            type="text"
+                            name="categories"
+                            value={editedProduct.categories.join(',')}
+                            onChange={handleChange}
+                          />
+                        </Td>
+                        <Td>
+                          <input
+                            className="input-field"
+                            type="text"
+                            name="variants"
+                            value={editedProduct.variants.join(',')}
+                            onChange={handleChange}
+                          />
+                        </Td>
+                        <Td>
+                          <input
+                            className="input-field"
+                            type="text"
+                            name="sizes"
+                            value={editedProduct.sizes.join(',')}
+                            onChange={handleChange}
+                          />
+                        </Td>
+                        <Td>
+                          <input
+                            className="input-field"
+                            type="text"
+                            name="price"
+                            value={editedProduct.price}
+                            onChange={handleChange}
+                          />
+                        </Td>
+                        <Td>
+                          <button
+                            className="save-button"
+                            type="button"
+                            onClick={handleUpdateProduct}>
+                            Update
+                          </button>
+                        </Td>
+                      </Tr>
+                    )}
+                    <Tr>
                       <Td
                         className="td-id"
                         data-tooltip-id="show-full-id-tooltip"
@@ -214,13 +322,13 @@ const Products = () => {
                       <Td>{product.sizes.join(', ')}</Td>
                       <Td>${product.price}</Td>
                       <Td>
-                        <i className="fa fa-pencil"></i>
+                        <i className="fa fa-pencil" onClick={() => handleEditClick(product)}></i>
                         <i
                           className="fa fa-window-close"
                           onClick={() => dispatch(removeProduct({ productId: product.id }))}></i>
                       </Td>
                     </Tr>
-                  </>
+                  </Fragment>
                 ))}
               </Tbody>
             </Table>
