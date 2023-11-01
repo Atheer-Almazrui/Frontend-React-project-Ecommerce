@@ -37,6 +37,11 @@ export const categorySlice = createSlice({
         (category) => category.id !== action.payload.categoryId
       )
       state.categories = filteredItems
+    },
+    updateCategory: (state, action: { payload: { editedCategory: Category } }) => {
+      const { id, name } = action.payload.editedCategory
+      const updatedItem = state.categories.find((category) => category.id === id)
+      if (updatedItem) updatedItem.name = name
     }
   },
   extraReducers: (builder) => {
@@ -55,6 +60,6 @@ export const categorySlice = createSlice({
       })
   }
 })
-export const { removeCategory, addCategory } = categorySlice.actions
+export const { removeCategory, addCategory, updateCategory } = categorySlice.actions
 
 export default categorySlice.reducer

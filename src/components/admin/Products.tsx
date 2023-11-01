@@ -1,7 +1,5 @@
 import { ChangeEvent, FormEvent, Fragment, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-
-// import Collapsible from 'react-collapsible'
 import { Tooltip } from 'react-tooltip'
 import 'react-tooltip/dist/react-tooltip.css'
 import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table'
@@ -17,7 +15,6 @@ import {
 import { AppDispatch, RootState } from '../../redux/store'
 
 import AdminSidebar from './AdminSidebar'
-// import AdminForm from './AdminForm'
 import '../../styles/adminOperations.scss'
 
 const initialProductState: Product = {
@@ -33,13 +30,20 @@ const initialProductState: Product = {
 
 const Products = () => {
   const dispatch = useDispatch<AppDispatch>()
+
   const [product, setProduct] = useState<Product>(initialProductState)
   const [isAdding, setIsAdding] = useState(false)
+  const [newProductID, setNewProductID] = useState(0)
   const [isEditing, setIsEditing] = useState(false)
   const [editedID, setEditedID] = useState(0)
   const [editedProduct, setEditedProduct] = useState<Product>(product)
   const [tooltipContent, setTooltipContent] = useState('')
+
   const { products, isLoading, error } = useSelector((state: RootState) => state.products)
+
+  useEffect(() => {
+    dispatch(fetchProducts())
+  }, [])
 
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
@@ -75,11 +79,8 @@ const Products = () => {
     }
   }
 
-  useEffect(() => {
-    dispatch(fetchProducts())
-  }, [])
-
   const handleAddClick = () => {
+    setNewProductID(+new Date())
     setIsAdding(true)
   }
 
@@ -97,11 +98,8 @@ const Products = () => {
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
     setIsAdding(false)
-    // Send the product data to your backend or in this case send it to Redux
-    console.log('New product data:', product)
-    // let's add Id property to the object (usually IDs are generated automatically on the backend)
-    product.id = +new Date()
-    console.log('product:', product)
+
+    product.id = newProductID
 
     dispatch(addProduct({ product }))
     // Reset the form
@@ -118,12 +116,11 @@ const Products = () => {
   return (
     <div className="container">
       <AdminSidebar />
-      <div className="form-container">
-        {!isAdding && (
-          <button className="floating-button" onClick={handleAddClick}>
-            +
-          </button>
-        )}
+      <div className="admin-container">
+        <h1 className="title">Products</h1>
+        <button className="floating-button" onClick={handleAddClick}>
+          +
+        </button>
         <div className="table-container">
           <form onSubmit={handleSubmit}>
             <Table className="table">
@@ -143,15 +140,12 @@ const Products = () => {
               <Tbody>
                 {isAdding && (
                   <Tr>
-                    <Td>
-                      <input
-                        className="input-field"
-                        type="text"
-                        name="id"
-                        value={+new Date()}
-                        onChange={handleChange}
-                        disabled
-                      />
+                    <Td
+                      className="td-id"
+                      data-tooltip-id="show-full-id-tooltip"
+                      onMouseEnter={() => setTooltipContent('ID: ' + newProductID)}>
+                      <Tooltip id="show-full-id-tooltip" place="right" content={tooltipContent} />
+                      {newProductID}
                     </Td>
                     <Td>
                       <input
@@ -210,7 +204,7 @@ const Products = () => {
                       />
                     </Td>
                     <Td>
-                      <button className="action-button" type="submit">
+                      <button className="save-update-buttons" type="submit">
                         Save
                       </button>
                     </Td>
@@ -220,15 +214,16 @@ const Products = () => {
                   <Fragment key={product.id}>
                     {isEditing && editedID == product.id && (
                       <Tr>
-                        <Td>
-                          <input
-                            className="input-field"
-                            type="text"
-                            name="id"
-                            value={editedProduct.id}
-                            onChange={handleChange}
-                            disabled
+                        <Td
+                          className="td-id"
+                          data-tooltip-id="show-full-id-tooltip"
+                          onMouseEnter={() => setTooltipContent('ID: ' + editedProduct.id)}>
+                          <Tooltip
+                            id="show-full-id-tooltip"
+                            place="right"
+                            content={tooltipContent}
                           />
+                          {editedProduct.id}
                         </Td>
                         <Td>
                           <input
@@ -295,7 +290,7 @@ const Products = () => {
                         </Td>
                         <Td>
                           <button
-                            className="action-button"
+                            className="save-update-buttons"
                             type="button"
                             onClick={handleUpdateProduct}>
                             Update
@@ -322,9 +317,11 @@ const Products = () => {
                       <Td>{product.sizes.join(', ')}</Td>
                       <Td>${product.price}</Td>
                       <Td>
-                        <i className="fa fa-pencil" onClick={() => handleEditClick(product)}></i>
                         <i
-                          className="fa fa-window-close"
+                          className="fa fa-pencil action-icons"
+                          onClick={() => handleEditClick(product)}></i>
+                        <i
+                          className="fa fa-window-close action-icons"
                           onClick={() => dispatch(removeProduct({ productId: product.id }))}></i>
                       </Td>
                     </Tr>

@@ -12,6 +12,11 @@ $icon-url-categories: 'https://img.icons8.com/ios-glyphs/30/category.png';
   display: flex;
 }
 
+.title {
+  margin-left: 5rem;
+  margin-top: 1rem;
+}
+
 .main-content {
   background-color: antiquewhite;
   padding: 1em;
@@ -89,7 +94,7 @@ $icon-url-categories: 'https://img.icons8.com/ios-glyphs/30/category.png';
 
     li {
       padding: 0.5em 1em 0.5em 3em;
-      font-size: 0.95em;
+      font-size: 1.1rem;
       background-repeat: no-repeat;
       background-position: left 15px center;
       background-size: auto 20px;
@@ -135,22 +140,6 @@ $icon-url-categories: 'https://img.icons8.com/ios-glyphs/30/category.png';
       h2 {
         opacity: 0;
         position: absolute;
-        top: 50%;
-        left: $menu-width-tablet + 10px;
-        margin: 0;
-        min-width: 200px;
-        border-radius: 4px;
-        background: rgba(0, 0, 0, 0.4);
-        transform: translate3d(-20px, -50%, 0);
-        transition: all 0.15s ease-in-out;
-      }
-
-      &:hover {
-        h2 {
-          opacity: 1;
-          color: #fff;
-          transform: translate3d(0px, -50%, 0);
-        }
       }
     }
 
