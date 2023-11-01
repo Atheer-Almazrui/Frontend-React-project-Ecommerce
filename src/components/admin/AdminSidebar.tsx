@@ -16,22 +16,16 @@ const AdminSidebar = () => {
         </header>
         <ul>
           <Link className="span" to="/dashboard/admin/products">
-            <li tabIndex={0} className="icon-products">
-              {/* put icon tag here insted of class */}
-              Products
-            </li>
+            <li className="icon-products">Products</li>
           </Link>
 
-          <li tabIndex={0} className="icon-categories">
-            <Link className="span" to="/dashboard/admin/categories">
-              Categories
-            </Link>
-          </li>
-          <li tabIndex={0} className="icon-users">
-            <Link className="span" to="/dashboard/admin/userslist">
-              Users
-            </Link>
-          </li>
+          <Link className="span" to="/dashboard/admin/categories">
+            <li className="icon-categories">Categories</li>
+          </Link>
+
+          <Link className="span" to="/dashboard/admin/userslist">
+            <li className="icon-users">Users</li>
+          </Link>
         </ul>
       </nav>
 

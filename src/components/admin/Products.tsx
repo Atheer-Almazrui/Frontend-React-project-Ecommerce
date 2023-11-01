@@ -210,7 +210,7 @@ const Products = () => {
                       />
                     </Td>
                     <Td>
-                      <button className="save-button" type="submit">
+                      <button className="action-button" type="submit">
                         Save
                       </button>
                     </Td>
@@ -295,7 +295,7 @@ const Products = () => {
                         </Td>
                         <Td>
                           <button
-                            className="save-button"
+                            className="action-button"
                             type="button"
                             onClick={handleUpdateProduct}>
                             Update
