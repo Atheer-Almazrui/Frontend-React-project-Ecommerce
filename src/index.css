@@ -4,4 +4,7 @@ body {
   border: 0px;
   background-color: rgb(240, 240, 240);
   font-family: system-ui;
+  /* Hide scrollbars */
+  /* overflow: hidden;  */
+
 }

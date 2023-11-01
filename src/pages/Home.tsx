@@ -52,12 +52,13 @@ const Home = () => {
       <div className="grid-container">
         <div className="search-container">
           <input
+            className="input"
             type="text"
             placeholder="🔎  Discover Amazing Products.."
             value={searchWord}
             onChange={handleSearch}
           />
-          <select name="sort" id="sort" onChange={handleSort}>
+          <select className="select" name="sort" id="sort" onChange={handleSort}>
             <option hidden>Sort by</option>
             <option value="priceASC">Price: Low to High</option>
             <option value="priceDESC">Price: High to Low</option>
