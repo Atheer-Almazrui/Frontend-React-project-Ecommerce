@@ -14,7 +14,6 @@ const ProductDetails = () => {
   const dispatch = useDispatch<AppDispatch>()
   const { singleProduct, isLoading, error } = useSelector((state: RootState) => state.products)
   const { categories } = useSelector((state: RootState) => state.categories)
-
   useEffect(() => {
     dispatch(fetchProducts())
       .then(() => dispatch(findProudctDetails(Number(id))))

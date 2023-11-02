@@ -1,108 +1,64 @@
 .hero-section {
-  position: relative;
-  height: 20rem;
-  margin: 4rem 4rem;
-
-  @media (max-width: 768px) {
-    height: 100%;
-  }
-}
-
-.content-wrapper {
+  max-height: 9rem;
   display: flex;
   justify-content: space-around;
-  align-items: center;
-  height: 100%;
+  align-items: flex-end;
 
   @media (max-width: 768px) {
+    margin-top: 10rem;
+    padding-bottom: 15.9rem;
     flex-direction: column;
   }
-  
-}
 
-.hero-content {
-  width: 40rem; 
-  text-align: left;
+  .hero-content {
+    width: 25rem;
+    text-align: left;
+    color: white;
+    padding-bottom: 3em;
+    @media (max-width: 768px) {
+      width: 100%;
+      text-align: center;
+    }
 
-  @media (max-width: 768px) {
-    width: 100%;
-    text-align: center;
+    h1 {
+      font-size: 2.4rem;
+      // font-feature-settings: 'smcp', 'zero';
+    }
+
+    p {
+      font-size: 1.6rem;
+    }
+
+    .hero-btn {
+      padding: 0.6em 0.6em;
+      margin-left: 0.2rem;
+      font-size: 1.1rem;
+      font-weight: bold;
+      border: none;
+      border-radius: 0.4rem;
+      background-color: #fff;
+      color: #02006b;
+      cursor: pointer;
+      animation: button-pulse 0.8s ease-in-out infinite alternate;
+    }
+
+    @keyframes button-pulse {
+      0% {
+        transform: scale(1);
+      }
+      100% {
+        transform: scale(1.1);
+      }
+    }
   }
-}
 
-.hero-content h1 {
-  font-size: 2.4rem;
-  margin-bottom: 1.2rem;
-  font-feature-settings: "smcp", "zero";
+  .hero-image {
+    max-width: 30rem;
+    margin-bottom: -1.2rem;
+    // border-right: #ffffff31 double 10px;
 
-  @media (max-width: 768px) {
-    font-size: 2rem;
-  }
-}
-
-.hero-content p {
-  font-size: 1.6rem;
-  margin-bottom: 1.8rem;
-
-  @media (max-width: 768px) {
-    font-size: 1.6rem;
-  }
-}
-
-.hero-btn {
-  padding: 0.6em 0.6em;
-  font-size: 1.1rem;
-  margin-left: 0.2rem;
-  border: none;
-  border-radius: 0.4rem;
-  background-color: #ff4081;
-  color: white;
-  cursor: pointer;
-  animation: button-pulse 1s ease-in-out infinite alternate;
-
-  @media (max-width: 768px) {
-    font-size: 1rem;
-    margin-top: 1rem;
-    margin-left: 0;
-  }
-}
-
-@keyframes button-pulse {
-  0% {
-    transform: scale(1);
-  }
-  100% {
-    transform: scale(1.1);
-  }
-}
-
-.image-container {
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  top: 0;
-  right: 0;
-
-  @media (max-width: 768px) {
-    position: static;
-    width: 100%;
-    padding-top: 2em;
-    justify-content: center;
-  }
-}
-
-.hero-image {
-  width: 100%;
-  height: 100%;
-  border: #ff4081;
-  border-style: dotted dashed solid;
-  border-width: 9px;
-  border-radius: 50%;
-  object-fit: cover;
-
-  @media (max-width: 768px) {
-    max-width: 60%;
-    max-height: 50%;
+    @media (max-width: 768px) {
+      max-width: 20rem;
+    }
   }
 }

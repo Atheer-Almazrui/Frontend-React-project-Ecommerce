@@ -5,7 +5,7 @@ import '../../styles/sidebar.scss'
 const AdminSidebar = () => {
   return (
     <aside className="sidebar-body">
-      <nav className="menu" tabIndex={0}>
+      <nav className="menu">
         <div className="smartphone-menu-trigger"></div>
         <header className="avatar">
           <img

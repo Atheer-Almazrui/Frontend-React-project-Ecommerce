@@ -10,16 +10,35 @@ $icon-url-categories: 'https://img.icons8.com/ios-glyphs/30/category.png';
 
 .container {
   display: flex;
+  margin: 0;
+  position: absolute;
+  z-index: 2;
+  top: 5.5rem;
+  background: linear-gradient(300deg, #5c5c5c, #0e3157, #7ba5c9);
+  background-size: 180% 180%;
+  animation: body 3s ease infinite;
+
+  @keyframes container {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
 }
 
 .title {
   margin-left: 5rem;
-  margin-top: 1rem;
+  color: #ffff;
 }
 
 .main-content {
   background-color: antiquewhite;
-  padding: 1em;
+  padding: 0.4em;
 }
 
 .sidebar-body {
@@ -28,44 +47,18 @@ $icon-url-categories: 'https://img.icons8.com/ios-glyphs/30/category.png';
   padding-left: $menu-width-desktop;
 }
 
-// .main {
-//   position: relative;
-//   height: 100vh;
-
-//   .helper {
-//     background: rgba(0, 0, 0, 0.2);
-//     color: $color-1st;
-//     position: absolute;
-//     top: 50%;
-//     left: 50%;
-//     transform: translate3d(-50%, -50%, 0);
-//     padding: 1.2em 2em;
-//     text-align: center;
-//     border-radius: 20px;
-//     font-size: 2em;
-//     font-weight: bold;
-
-//     .span {
-//       color: rgba(0, 0, 0, 0.2);
-//       font-size: 0.4em;
-//       text-decoration: none;
-//       display: block;
-//     }
-//   }
-// }
-
 .menu {
-  background: $color-2nd;
+  background: rgb(231, 231, 231);
   height: 100vh;
   width: $menu-width-desktop;
   position: fixed;
-  top: 4.75rem;
+  top: 5.5rem;
   left: 0;
   z-index: 5;
   outline: none;
 
   .avatar {
-    background: rgba(0, 0, 0, 0.1);
+    background: $color-2nd;
     padding: 2em 0.5em;
     text-align: center;
 
@@ -90,6 +83,7 @@ $icon-url-categories: 'https://img.icons8.com/ios-glyphs/30/category.png';
 
     .span {
       text-decoration: none;
+      color: #000;
     }
 
     li {

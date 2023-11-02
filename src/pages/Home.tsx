@@ -37,7 +37,7 @@ const Home = () => {
 
   const searchedProducts = searchWord
     ? products.filter(
-        (product) => product.name.toLowerCase().startsWith(searchWord.toLowerCase()) === true
+        (product) => product.name.toLowerCase().includes(searchWord.toLowerCase()) === true
       )
     : products
 
@@ -62,8 +62,8 @@ const Home = () => {
             <option hidden>Sort by</option>
             <option value="priceASC">Price: Low to High</option>
             <option value="priceDESC">Price: High to Low</option>
-            <option value="nameASC">Name A to Z</option>
-            <option value="nameDESC">Name Z to A</option>
+            <option value="nameASC">Name: A to Z</option>
+            <option value="nameDESC">Name: Z to A</option>
           </select>
         </div>
         <div className="grid">
@@ -73,9 +73,10 @@ const Home = () => {
                 <Link to={`/product/${product.id}`}>
                   <img src={product.image} alt={product.name} />
                 </Link>
+
                 <h3>{product.name}</h3>
-                <p>{product.description}</p>
-                <p>${product.price}</p>
+                <span>{product.description}</span>
+                <h2>${product.price}</h2>
                 <button>Add to Cart</button>
               </div>
             ))}
