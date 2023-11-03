@@ -52,7 +52,7 @@ const Home = () => {
       <div className="grid-container">
         <div className="search-container">
           <input
-            className="input"
+            className="search-input"
             type="text"
             placeholder="🔎  Discover Amazing Products.."
             value={searchWord}

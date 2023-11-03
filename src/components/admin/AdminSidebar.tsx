@@ -28,10 +28,6 @@ const AdminSidebar = () => {
           </Link>
         </ul>
       </nav>
-
-      {/* <main className="main">
-        <div className="helper"></div>
-      </main> */}
     </aside>
   )
 }

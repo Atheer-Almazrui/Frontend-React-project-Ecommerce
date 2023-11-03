@@ -1,11 +1,10 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 import Home from '../pages/Home'
-import AdminDashboard from '../pages/admin/AdminDashboard'
 import ProductDetails from '../pages/ProductDetails'
 import Error from '../pages/Error'
 import Contact from '../pages/Contact'
-import UserDashboard from '../pages/user/UserDashboard'
+import UserDashboard from '../pages/UserDashboard'
 
 import Products from '../components/admin/Products'
 import Header from '../components/Header'
@@ -19,7 +18,6 @@ const Index = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/user-dashboard" element={<UserDashboard />} />
-        <Route path="/admin-dashboard" element={<AdminDashboard />} />
         <Route path="/product/:id" element={<ProductDetails />} />
         <Route path="/dashboard/admin/categories" element={<Categories />} />
         <Route path="/dashboard/admin/products" element={<Products />} />

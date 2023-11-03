@@ -307,7 +307,7 @@ const Products = () => {
                         <Tooltip id="show-full-id-tooltip" place="right" content={tooltipContent} />
                       </Td>
 
-                      <Td>
+                      <Td className="td-image">
                         <img src={product.image} alt={product.name} />
                       </Td>
                       <Td>{product.name}</Td>

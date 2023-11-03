@@ -1,7 +1,7 @@
 .grid-container {
   max-width: 80rem;
   margin: 0 auto;
-  padding: 1.25em;
+  padding: 1em;
 }
 
 .grid {
@@ -68,7 +68,7 @@
   margin-bottom: 1rem;
 }
 
-.input[type='text'] {
+.search-input[type='text'] {
   padding: 0.8em;
   margin-bottom: 1rem;
   font-size: 1rem;
@@ -86,6 +86,7 @@
   &:hover {
     background-color: #f3f3f3;
   }
+
   &:focus {
     outline: none;
   }
