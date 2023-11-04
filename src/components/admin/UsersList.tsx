@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 
 import { AppDispatch, RootState } from '../../redux/store'
-import { fetchUsers, removeUser } from '../../redux/slices/users/userSlice'
+import { banUser, fetchUsers, removeUser } from '../../redux/slices/users/userSlice'
 
 import AdminSidebar from './AdminSidebar'
 import { Table, Tbody, Td, Th, Thead, Tr } from 'react-super-responsive-table'
@@ -41,21 +41,29 @@ const UsersList = () => {
               </Tr>
             </Thead>
             <Tbody>
-              {users.map((user) => (
-                <Tr key={user.id}>
-                  <Td>{user.id}</Td>
-                  <Td>{user.firstName}</Td>
-                  <Td>{user.lastName}</Td>
-                  <Td>{user.email}</Td>
-                  <Td>{user.role}</Td>
-                  <Td>
-                    <i className="fa fa-ban action-icons"></i>
-                    <i
-                      className="fa fa-window-close action-icons"
-                      onClick={() => dispatch(removeUser({ userId: user.id }))}></i>
-                  </Td>
-                </Tr>
-              ))}
+              {users.map((user) => {
+                if (user.role !== 'admin') {
+                  return (
+                    <Tr key={user.id}>
+                      <Td>{user.id}</Td>
+                      <Td>{user.firstName}</Td>
+                      <Td>{user.lastName}</Td>
+                      <Td>{user.email}</Td>
+                      <Td>{user.role}</Td>
+                      <Td>
+                        <i
+                          className={
+                            user.ban ? 'fas fa-lock ban-icon' : 'fas fa-lock-open unban-icon'
+                          }
+                          onClick={() => dispatch(banUser({ userId: user.id }))}></i>
+                        <i
+                          className="fa fa-window-close action-icons"
+                          onClick={() => dispatch(removeUser({ userId: user.id }))}></i>
+                      </Td>
+                    </Tr>
+                  )
+                }
+              })}
             </Tbody>
           </Table>
         </div>

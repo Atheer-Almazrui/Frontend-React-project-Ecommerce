@@ -8,6 +8,7 @@ import { AppDispatch, RootState } from '../redux/store'
 import { fetchUsers, login } from '../redux/slices/users/userSlice'
 
 import '../styles/login.scss'
+
 const Login = ({ pathName }: { pathName: string }) => {
   const dispatch = useDispatch<AppDispatch>()
   const { users } = useSelector((state: RootState) => state.users)
@@ -17,10 +18,6 @@ const Login = ({ pathName }: { pathName: string }) => {
     email: '',
     password: ''
   })
-
-  useEffect(() => {
-    dispatch(fetchUsers())
-  }, [])
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target
@@ -35,13 +32,27 @@ const Login = ({ pathName }: { pathName: string }) => {
 
     try {
       const foundUser = users.find((userData) => userData.email === formData.email)
+
+      if (!foundUser) {
+        toast.error('User Not found 😶')
+        return
+      }
+
+      if (foundUser.password !== formData.password) {
+        toast.error('Wrong password 😟')
+        return
+      }
+
+      if (foundUser.ban) {
+        toast.error('Sorry Your are banned 🚫')
+        return
+      }
+
       if (foundUser && foundUser.password === formData.password) {
         dispatch(login(foundUser))
         foundUser.role === 'admin'
           ? navigate(pathName ? pathName : '/dashboard/admin/profile')
           : navigate(pathName ? pathName : '/')
-      } else {
-        toast.error('Wrong email or password 😟')
       }
     } catch (error) {
       console.log(error)
@@ -55,23 +66,22 @@ const Login = ({ pathName }: { pathName: string }) => {
   }
 
   return (
-    <div className="login-container">
-      <form onSubmit={handleSubmit}>
+    <div>
+      <form className="form-container" onSubmit={handleSubmit}>
         <label>
-          Email:
+          Email :
           <input
-            className="login-input"
+            className="form-input"
             type="email"
             name="email"
             value={formData.email}
             onChange={handleChange}
           />
         </label>
-        <br />
         <label>
-          Password:
+          Password :
           <input
-            className="login-input"
+            className="form-input"
             type="password"
             name="password"
             value={formData.password}
@@ -79,7 +89,7 @@ const Login = ({ pathName }: { pathName: string }) => {
           />
         </label>
         <br />
-        <button className="login-button" type="submit">
+        <button className="form-button" type="submit">
           Log in
         </button>
       </form>
