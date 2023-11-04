@@ -43,9 +43,6 @@ const Login = ({ pathName }: { pathName: string }) => {
       } else {
         toast.error('Wrong email or password 😟')
       }
-
-      console.log('Email:', formData.email)
-      console.log('Password:', formData.password)
     } catch (error) {
       console.log(error)
     }

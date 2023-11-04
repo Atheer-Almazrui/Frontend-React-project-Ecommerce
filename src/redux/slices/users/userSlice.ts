@@ -24,12 +24,17 @@ export type UserState = {
   userData: User | null
 }
 
+const data =
+  localStorage.getItem('loginData') !== null
+    ? JSON.parse(String(localStorage.getItem('loginData')))
+    : []
+
 const initialState: UserState = {
   users: [],
   error: null,
   isLoading: false,
-  isLoggedIn: false,
-  userData: null
+  isLoggedIn: data.isLoggedIn,
+  userData: data.userData
 }
 
 export const userSlice = createSlice({
@@ -43,10 +48,24 @@ export const userSlice = createSlice({
     login: (state, action) => {
       state.isLoggedIn = true
       state.userData = action.payload
+      localStorage.setItem(
+        'loginData',
+        JSON.stringify({
+          isLoggedIn: state.isLoggedIn,
+          userData: state.userData
+        })
+      )
     },
     logout: (state) => {
       state.isLoggedIn = false
       state.userData = null
+      localStorage.setItem(
+        'loginData',
+        JSON.stringify({
+          isLoggedIn: state.isLoggedIn,
+          userData: state.userData
+        })
+      )
     }
   },
   extraReducers: (builder) => {

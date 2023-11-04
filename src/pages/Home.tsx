@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect } from 'react'
+import { ChangeEvent, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
@@ -8,6 +8,7 @@ import {
   searchProductByName,
   sortProducts
 } from '../redux/slices/products/productSlice'
+import { fetchCategories } from '../redux/slices/categories/categorySlice'
 import { AppDispatch, RootState } from '../redux/store'
 
 import HeroSection from '../components/HeroSection'
@@ -18,21 +19,29 @@ const Home = () => {
   const { searchWord, products, isLoading, error } = useSelector(
     (state: RootState) => state.products
   )
+  const { categories } = useSelector((state: RootState) => state.categories)
+  const [selectedCategories, setSelectedCategories] = useState<number[]>([])
 
   useEffect(() => {
-    dispatch(fetchProducts())
+    dispatch(fetchProducts()).then(() => dispatch(fetchCategories()))
   }, [])
-
-  if (isLoading) {
-    return <h1>Products are loading...</h1>
-  }
-  if (error) {
-    return <h1>{error}</h1>
-  }
 
   const handleSearch = (event: ChangeEvent<HTMLInputElement>) => {
     const searchTerm = event.target.value
     dispatch(searchProductByName(searchTerm))
+  }
+
+  const handleSort = (event: ChangeEvent<HTMLSelectElement>) => {
+    const sortedType = event.target.value
+    dispatch(sortProducts(sortedType))
+  }
+
+  const handleCategoryFilter = (categoryId: number) => {
+    if (selectedCategories.includes(categoryId)) {
+      setSelectedCategories(selectedCategories.filter((id) => id !== categoryId))
+    } else {
+      setSelectedCategories([...selectedCategories, categoryId])
+    }
   }
 
   const searchedProducts = searchWord
@@ -41,9 +50,18 @@ const Home = () => {
       )
     : products
 
-  const handleSort = (event: ChangeEvent<HTMLSelectElement>) => {
-    const sortedType = event.target.value
-    dispatch(sortProducts(sortedType))
+  const filteredProducts =
+    selectedCategories.length > 0
+      ? searchedProducts.filter((product) =>
+          product.categories.some((category) => selectedCategories.includes(category))
+        )
+      : searchedProducts
+
+  if (isLoading) {
+    return <h1>Products are loading...</h1>
+  }
+  if (error) {
+    return <h1>{error}</h1>
   }
 
   return (
@@ -66,9 +84,24 @@ const Home = () => {
             <option value="nameDESC">Name: Z to A</option>
           </select>
         </div>
+        <div className="category-buttons">
+          <button
+            className={selectedCategories.length === 0 ? 'active' : ''}
+            onClick={() => setSelectedCategories([])}>
+            All
+          </button>
+          {categories.map((category) => (
+            <button
+              key={category.id}
+              className={selectedCategories.includes(category.id) ? 'active' : ''}
+              onClick={() => handleCategoryFilter(category.id)}>
+              {category.name}
+            </button>
+          ))}
+        </div>
         <div className="grid">
-          {searchedProducts.length > 0 &&
-            searchedProducts.map((product: Product) => (
+          {filteredProducts.length > 0 &&
+            filteredProducts.map((product: Product) => (
               <div className="card" key={product.id}>
                 <Link to={`/product/${product.id}`}>
                   <img src={product.image} alt={product.name} />
