@@ -12,7 +12,7 @@
     "firstName": "Jane",
     "lastName": "Smith",
     "email": "jane.smith@example.com",
-    "password": "hashed_password",
+    "password": "12345678",
     "role": "visitor"
   },
   {
@@ -22,5 +22,13 @@
     "email": "david.johnson@example.com",
     "password": "hashed_password",
     "role": "visitor"
+  },
+  {
+    "id": 4,
+    "firstName": "Atheer",
+    "lastName": "Almazrui",
+    "email": "atheerabdulrahman.almazrui@integrify.io",
+    "password": "12345678",
+    "role": "admin"
   }
 ]

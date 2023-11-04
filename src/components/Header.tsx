@@ -1,26 +1,18 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+
+import { AppDispatch, RootState } from '../redux/store'
+import { logout } from '../redux/slices/users/userSlice'
 
 import '../styles/header.scss'
 
-// const pages = [
-//   {
-//     name: 'Home',
-//     path: '/'
-//   },
-//   {
-//     name: 'About',
-//     path: '/about'
-//   },
-//   {
-//     name: 'Contact',
-//     path: '/contact'
-//   }
-// ]
-
 const Header = () => {
+  const dispatch = useDispatch<AppDispatch>()
+  const { isLoggedIn, userData } = useSelector((state: RootState) => state.users)
+  const navigate = useNavigate()
   const [isNavExpanded, setIsNavExpanded] = useState(false)
-  // use .map between bars in nav
+
   return (
     <div className="header-container">
       <nav className="navigation">
@@ -59,32 +51,78 @@ const Header = () => {
                 About
               </Link>
             </li>
-            <li>
-              <Link
-                to="/contact"
-                className="nav-link hamburger-link"
-                onClick={() => {
-                  setIsNavExpanded(false)
-                }}>
-                Contact
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/dashboard/admin/products"
-                className="nav-link hamburger-link"
-                onClick={() => {
-                  setIsNavExpanded(false)
-                }}>
-                AdminDashboard
-              </Link>
-            </li>
-            <li>
-              <i className="fa fa-shopping-cart fa-xl cart">
-                <span>1</span>
-              </i>
-              {/* fa-2xl  larger cart */}
-            </li>
+
+            {isLoggedIn && (
+              <>
+                {userData?.role === 'admin' ? (
+                  <li>
+                    <Link
+                      to="/dashboard/admin/profile"
+                      className="nav-link hamburger-link"
+                      onClick={() => {
+                        setIsNavExpanded(false)
+                      }}>
+                      <i className="fa fa-user-shield fa-xl" style={{ color: '#02006b' }}></i>
+                    </Link>
+                  </li>
+                ) : (
+                  <li>
+                    <Link
+                      to="/dashboard/user/profile"
+                      className="nav-link hamburger-link"
+                      onClick={() => {
+                        setIsNavExpanded(false)
+                      }}>
+                      <i className="fa fa-user-large fa-xl" style={{ color: '#02006b' }}></i>
+                    </Link>
+                  </li>
+                )}
+
+                <li
+                  className="nav-link hamburger-link"
+                  onClick={() => {
+                    setIsNavExpanded(false)
+                    dispatch(logout())
+                    navigate('/')
+                  }}>
+                  <i className="fa fa-sign-out fa-xl logout"></i>
+                </li>
+              </>
+            )}
+
+            {!isLoggedIn && (
+              <>
+                <li>
+                  <Link
+                    to="/signup"
+                    className="nav-link hamburger-link"
+                    onClick={() => {
+                      setIsNavExpanded(false)
+                    }}>
+                    Sign up
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/login"
+                    className="nav-link hamburger-link"
+                    onClick={() => {
+                      setIsNavExpanded(false)
+                    }}>
+                    Log in
+                  </Link>
+                </li>
+              </>
+            )}
+            {/* the following code is to hide the cart icon if he is an admin, otherwies display the cart */}
+            {userData?.role !== 'admin' && (
+              <li>
+                <i className="fa fa-shopping-cart fa-xl cart">
+                  <span>1</span>
+                </i>
+                {/* fa-2xl  larger cart */}
+              </li>
+            )}
           </ul>
         </div>
       </nav>

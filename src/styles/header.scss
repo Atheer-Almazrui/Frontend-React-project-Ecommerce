@@ -24,6 +24,28 @@
       padding-top: 0.5em;
     }
 
+    .logout {
+      color: #02006b;
+      // margin-left: 44rem;
+
+      &:hover {
+        transform: scale(1.1);
+      }
+      &:hover::after {
+        content: 'Logout';
+        position: absolute;
+        top: calc(100% + 12px);
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 0.9em;
+        background-color: #ccc;
+        color: black;
+        border-radius: 4px;
+        font-size: 0.6rem;
+        text-transform: lowercase;
+      }
+    }
+
     .cart {
       color: #02006b;
       // margin-left: 44rem;
@@ -38,6 +60,9 @@
         border-radius: 50%;
         font-size: small;
         padding: 0.6em 0.5em;
+      }
+      &:hover {
+        transform: scale(1.1);
       }
     }
 

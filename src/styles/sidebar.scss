@@ -1,4 +1,4 @@
-$color-1st: #396ddd;
+$color-1st: #02006b;
 $color-2nd: #ffff;
 
 $menu-width-desktop: 240px;
@@ -50,9 +50,9 @@ $icon-url-categories: 'https://img.icons8.com/ios-glyphs/30/category.png';
     outline: none;
 
     .avatar {
-      // background: $color-2nd;
       padding: 2em 0.5em;
       text-align: center;
+      cursor: pointer;
 
       img {
         width: 100px;
@@ -60,11 +60,25 @@ $icon-url-categories: 'https://img.icons8.com/ios-glyphs/30/category.png';
         overflow: hidden;
         border: 4px solid $color-1st;
         box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.2);
+
+        &:hover {
+          box-shadow: $color-1st 0px 3px 9px 0px;
+        }
       }
 
       h2 {
         font-weight: normal;
-        margin-bottom: 0;
+        margin: 0.5em 0em 0em 0em;
+
+        &:hover {
+          font-weight: bold;
+        }
+      }
+
+      h4 {
+        font-weight: normal;
+        color: gray;
+        margin: 0;
       }
     }
 
