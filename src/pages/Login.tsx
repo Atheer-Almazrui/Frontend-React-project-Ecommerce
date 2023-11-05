@@ -31,28 +31,33 @@ const Login = ({ pathName }: { pathName: string }) => {
     event.preventDefault()
 
     try {
-      const foundUser = users.find((userData) => userData.email === formData.email)
-
-      if (!foundUser) {
-        toast.error('User Not found 😶')
+      if (formData.email === '' || formData.password === '') {
+        toast.error('You have to enter data')
         return
-      }
+      } else {
+        const foundUser = users.find((userData) => userData.email === formData.email)
 
-      if (foundUser.password !== formData.password) {
-        toast.error('Wrong password 😟')
-        return
-      }
+        if (!foundUser) {
+          toast.error('User Not found 😶')
+          return
+        }
 
-      if (foundUser.ban) {
-        toast.error('Sorry Your are banned 🚫')
-        return
-      }
+        if (foundUser.password !== formData.password) {
+          toast.error('Wrong password 😟')
+          return
+        }
 
-      if (foundUser && foundUser.password === formData.password) {
-        dispatch(login(foundUser))
-        foundUser.role === 'admin'
-          ? navigate(pathName ? pathName : '/dashboard/admin/profile')
-          : navigate(pathName ? pathName : '/')
+        if (foundUser.ban) {
+          toast.error('Sorry Your are banned 🚫')
+          return
+        }
+
+        if (foundUser && foundUser.password === formData.password) {
+          dispatch(login(foundUser))
+          foundUser.role === 'admin'
+            ? navigate(pathName ? pathName : '/dashboard/admin/profile')
+            : navigate(pathName ? pathName : '/')
+        }
       }
     } catch (error) {
       console.log(error)

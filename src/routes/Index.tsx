@@ -42,7 +42,7 @@ const Index = () => {
           <Route path="admin/orders" element={<Orders />} />
         </Route>
       </Routes>
-      <Footer />
+      {/* <Footer /> */}
     </BrowserRouter>
   )
 }

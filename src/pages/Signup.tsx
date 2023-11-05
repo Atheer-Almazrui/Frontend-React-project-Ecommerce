@@ -34,9 +34,19 @@ const Signup = () => {
     event.preventDefault()
 
     try {
-      const newUser = { id: new Date().getTime(), ...formData }
-      dispatch(fetchUsers()).then(() => dispatch(addUser(newUser)))
-      navigate('/login')
+      if (
+        formData.email === '' ||
+        formData.password === '' ||
+        formData.firstName === '' ||
+        formData.lastName === ''
+      ) {
+        toast.error('You have to enter data')
+        return
+      } else {
+        const newUser = { id: new Date().getTime(), ...formData }
+        dispatch(fetchUsers()).then(() => dispatch(addUser(newUser)))
+        navigate('/login')
+      }
     } catch (error) {
       console.log(error)
     }

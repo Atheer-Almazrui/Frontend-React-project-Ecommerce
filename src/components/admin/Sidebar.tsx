@@ -42,7 +42,7 @@ const AdminSidebar = () => {
             </>
           ) : (
             <Link className="span" to="/dashboard/user/orders">
-              <li className="icon-order">Orders</li>
+              <li className="icon-orders">Orders</li>
             </Link>
           )}
         </ul>

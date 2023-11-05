@@ -9,13 +9,14 @@
   // background-color: antiquewhite;
 
   .title {
-    margin-left: 35rem;
-    color: white;
+    margin-left: 25rem;
+    color: rgba(255, 255, 255, 0);
   }
 
   .table-container {
     // width: 100%;
     padding-right: 0.5em;
+    margin-top: 3rem;
     overflow-x: auto;
   }
 
@@ -69,8 +70,8 @@
   .floating-button {
     position: fixed;
     z-index: 1;
-    top: 5.5rem;
-    left: 46.5rem;
+    top: 8.5rem;
+    left: 20.5rem;
     width: 3.6rem;
     height: 3.6rem;
     border-radius: 50%;
