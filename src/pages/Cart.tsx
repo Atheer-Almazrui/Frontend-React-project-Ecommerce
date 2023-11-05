@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux'
 
 import { AppDispatch, RootState } from '../redux/store'
-import { removeItem } from '../redux/slices/cart/cartSlice'
+import { removeAllItem, removeItem } from '../redux/slices/cart/cartSlice'
 
 import '../styles/cart.scss'
 
@@ -29,6 +29,9 @@ const Cart = () => {
               </div>
             ))}
             <div className="total-price">Total: ${totalPrice}</div>
+            <button className="remove-btn" onClick={() => dispatch(removeAllItem())}>
+              Remove All items
+            </button>
           </>
         ) : (
           <h2>No items in the cart.</h2>
