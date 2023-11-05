@@ -1,16 +1,15 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { ChangeEvent, FormEvent, Fragment, useEffect, useState } from 'react'
+import { ChangeEvent, FormEvent, Fragment, useState } from 'react'
 
 import { AppDispatch, RootState } from '../../redux/store'
 import {
   Category,
   addCategory,
-  fetchCategories,
   removeCategory,
   updateCategory
 } from '../../redux/slices/categories/categorySlice'
 
-import AdminSidebar from './AdminSidebar'
+import AdminSidebar from './Sidebar'
 import { Table, Tbody, Td, Th, Thead, Tr } from 'react-super-responsive-table'
 
 const initialCategoryState: Category = {
@@ -24,15 +23,12 @@ const Categories = () => {
   const [category, setCategory] = useState<Category>(initialCategoryState)
   const [isAdding, setIsAdding] = useState(false)
   const [newCategoryID, setNewCategoryID] = useState(0)
+
   const [isEditing, setIsEditing] = useState(false)
   const [editedID, setEditedID] = useState(0)
   const [editedCategory, setEditedCategory] = useState<Category>(category)
 
   const { categories, isLoading, error } = useSelector((state: RootState) => state.categories)
-
-  useEffect(() => {
-    dispatch(fetchCategories())
-  }, [])
 
   const handleAddClick = () => {
     setNewCategoryID(+new Date())
@@ -80,7 +76,7 @@ const Categories = () => {
   return (
     <div className="container">
       <AdminSidebar />
-      <div className="admin-container">
+      <div className="sidebar-container">
         <h1 className="title">Categories</h1>
         <button className="floating-button" onClick={handleAddClick}>
           +

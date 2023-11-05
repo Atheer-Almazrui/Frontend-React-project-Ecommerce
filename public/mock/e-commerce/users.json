@@ -14,7 +14,7 @@
     "lastName": "Smith",
     "email": "jane.smith@example.com",
     "password": "12345678",
-    "role": "visitor",
+    "role": "user",
     "ban": false
   },
   {
@@ -23,7 +23,7 @@
     "lastName": "Johnson",
     "email": "david.johnson@example.com",
     "password": "12345678",
-    "role": "visitor",
+    "role": "user",
     "ban": true
   },
   {

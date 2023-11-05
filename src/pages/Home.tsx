@@ -1,14 +1,8 @@
-import { ChangeEvent, useEffect, useState } from 'react'
+import { ChangeEvent, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-import {
-  Product,
-  fetchProducts,
-  searchProductByName,
-  sortProducts
-} from '../redux/slices/products/productSlice'
-import { fetchCategories } from '../redux/slices/categories/categorySlice'
+import { Product, searchProductByName, sortProducts } from '../redux/slices/products/productSlice'
 import { AppDispatch, RootState } from '../redux/store'
 
 import HeroSection from '../components/HeroSection'
@@ -21,10 +15,6 @@ const Home = () => {
   )
   const { categories } = useSelector((state: RootState) => state.categories)
   const [selectedCategories, setSelectedCategories] = useState<number[]>([])
-
-  useEffect(() => {
-    dispatch(fetchProducts()).then(() => dispatch(fetchCategories()))
-  }, [])
 
   const handleSearch = (event: ChangeEvent<HTMLInputElement>) => {
     const searchTerm = event.target.value

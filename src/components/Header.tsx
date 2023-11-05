@@ -17,7 +17,7 @@ const Header = () => {
     <div className="header-container">
       <nav className="navigation">
         <Link to="/">
-          <img className="logo" src="src\assets\spark-logo.png" alt="logo Image" />
+          <img className="logo" src="\src\assets\spark-logo.png" alt="logo Image" />
         </Link>
 
         <button

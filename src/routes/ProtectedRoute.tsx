@@ -9,7 +9,7 @@ const ProtectedRoute = () => {
   const location = useLocation()
   const { isLoggedIn, userData } = useSelector((state: RootState) => state.users)
 
-  return isLoggedIn && userData?.role === 'visitor' ? (
+  return isLoggedIn && userData?.role === 'user' ? (
     <Outlet />
   ) : (
     <Login pathName={location.pathname} />

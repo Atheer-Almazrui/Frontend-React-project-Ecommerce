@@ -1,20 +1,15 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { useEffect } from 'react'
 
 import { AppDispatch, RootState } from '../../redux/store'
-import { banUser, fetchUsers, removeUser } from '../../redux/slices/users/userSlice'
+import { banUser, removeUser } from '../../redux/slices/users/userSlice'
 
-import AdminSidebar from './AdminSidebar'
+import AdminSidebar from './Sidebar'
 import { Table, Tbody, Td, Th, Thead, Tr } from 'react-super-responsive-table'
 
 const UsersList = () => {
   const dispatch = useDispatch<AppDispatch>()
 
   const { users, isLoading, error } = useSelector((state: RootState) => state.users)
-
-  useEffect(() => {
-    dispatch(fetchUsers())
-  }, [])
 
   if (isLoading) {
     return <h1>Categories are loading...</h1>
@@ -26,7 +21,7 @@ const UsersList = () => {
   return (
     <div className="container">
       <AdminSidebar />
-      <div className="admin-container">
+      <div className="sidebar-container">
         <h1 className="title">Users</h1>
         <div className="table-container">
           <Table className="table">

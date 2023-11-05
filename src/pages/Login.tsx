@@ -1,11 +1,11 @@
-import { ChangeEvent, FormEvent, useEffect, useState } from 'react'
+import { ChangeEvent, FormEvent, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from '../redux/store'
-import { fetchUsers, login } from '../redux/slices/users/userSlice'
+import { login } from '../redux/slices/users/userSlice'
 
 import '../styles/login.scss'
 

@@ -3,8 +3,6 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Home from '../pages/Home'
 import Login from '../pages/Login'
 import Signup from '../pages/Signup'
-import UserProfile from '../pages/UserProfile'
-import UserDashboard from '../pages/UserDashboard'
 import ProductDetails from '../pages/ProductDetails'
 import Error from '../pages/Error'
 
@@ -13,6 +11,7 @@ import Products from '../components/admin/Products'
 import AdminProfile from '../components/admin/AdminProfile'
 import Categories from '../components/admin/Categories'
 import UsersList from '../components/admin/UsersList'
+import UserProfile from '../components/user/UserProfile'
 
 import ProtectedRoute from './ProtectedRoute'
 import AdminRoute from './AdminRoute'
@@ -29,8 +28,8 @@ const Index = () => {
         <Route path="*" element={<Error />} />
 
         <Route path="/dashboard" element={<ProtectedRoute />}>
-          <Route path="user" element={<UserDashboard />} />
           <Route path="user/profile" element={<UserProfile />} />
+          {/* <Route path="user/orders" element={<UserOrders />} /> */}
         </Route>
 
         <Route path="/dashboard" element={<AdminRoute />}>

@@ -69,14 +69,11 @@ $icon-url-categories: 'https://img.icons8.com/ios-glyphs/30/category.png';
       h2 {
         font-weight: normal;
         margin: 0.5em 0em 0em 0em;
-
-        &:hover {
-          font-weight: bold;
-        }
       }
 
       h4 {
         font-weight: normal;
+        font-size: medium;
         color: gray;
         margin: 0;
       }
@@ -141,7 +138,7 @@ $icon-url-categories: 'https://img.icons8.com/ios-glyphs/30/category.png';
           width: $menu-width-tablet - 30px;
         }
 
-        h2 {
+        h2, h4 {
           opacity: 0;
           position: absolute;
         }

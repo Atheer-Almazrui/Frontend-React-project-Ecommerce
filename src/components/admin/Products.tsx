@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, Fragment, useEffect, useState } from 'react'
+import { ChangeEvent, FormEvent, Fragment, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Tooltip } from 'react-tooltip'
 import 'react-tooltip/dist/react-tooltip.css'
@@ -8,13 +8,12 @@ import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css'
 import {
   Product,
   addProduct,
-  fetchProducts,
   removeProduct,
   updateProduct
 } from '../../redux/slices/products/productSlice'
 import { AppDispatch, RootState } from '../../redux/store'
 
-import AdminSidebar from './AdminSidebar'
+import AdminSidebar from './Sidebar'
 import '../../styles/adminOperations.scss'
 
 const initialProductState: Product = {
@@ -34,16 +33,15 @@ const Products = () => {
   const [product, setProduct] = useState<Product>(initialProductState)
   const [isAdding, setIsAdding] = useState(false)
   const [newProductID, setNewProductID] = useState(0)
+
   const [isEditing, setIsEditing] = useState(false)
   const [editedID, setEditedID] = useState(0)
   const [editedProduct, setEditedProduct] = useState<Product>(product)
+
   const [tooltipContent, setTooltipContent] = useState('')
 
   const { products, isLoading, error } = useSelector((state: RootState) => state.products)
-
-  useEffect(() => {
-    dispatch(fetchProducts())
-  }, [])
+  const { categories } = useSelector((state: RootState) => state.categories)
 
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
@@ -106,6 +104,11 @@ const Products = () => {
     setProduct(initialProductState)
   }
 
+  const getCategoryName = (categoryId: number) => {
+    const category = categories.find((category) => category.id === categoryId)
+    return category ? category.name : 'category not foumd'
+  }
+
   if (isLoading) {
     return <h1>Products are loading...</h1>
   }
@@ -116,7 +119,7 @@ const Products = () => {
   return (
     <div className="container">
       <AdminSidebar />
-      <div className="admin-container">
+      <div className="sidebar-container">
         <h1 className="title">Products</h1>
         <button className="floating-button" onClick={handleAddClick}>
           +
@@ -312,7 +315,14 @@ const Products = () => {
                       </Td>
                       <Td>{product.name}</Td>
                       <Td>{product.description}</Td>
-                      <Td>{product.categories.join(', ')}</Td>
+                      <Td>
+                        {product.categories &&
+                          product.categories.map((categoryId: number) => (
+                            <p className="category" key={categoryId}>
+                              {getCategoryName(Number(categoryId))}
+                            </p>
+                          ))}
+                      </Td>
                       <Td>{product.variants.join(', ')}</Td>
                       <Td>{product.sizes.join(', ')}</Td>
                       <Td>${product.price}</Td>
