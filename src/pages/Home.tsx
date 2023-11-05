@@ -17,7 +17,10 @@ const Home = () => {
     (state: RootState) => state.products
   )
   const { categories } = useSelector((state: RootState) => state.categories)
+
   const [selectedCategories, setSelectedCategories] = useState<number[]>([])
+  const [currentPage, setCurrentPage] = useState(1)
+  const productsPerPage = 3
 
   const handleSearch = (event: ChangeEvent<HTMLInputElement>) => {
     const searchTerm = event.target.value
@@ -38,9 +41,7 @@ const Home = () => {
   }
 
   const searchedProducts = searchWord
-    ? products.filter(
-        (product) => product.name.toLowerCase().includes(searchWord.toLowerCase()) === true
-      )
+    ? products.filter((product) => product.name.toLowerCase().includes(searchWord.toLowerCase()))
     : products
 
   const filteredProducts =
@@ -49,6 +50,20 @@ const Home = () => {
           product.categories.some((category) => selectedCategories.includes(category))
         )
       : searchedProducts
+
+  const totalPages = Math.ceil(filteredProducts.length / productsPerPage)
+
+  const handlePageChange = (pageNumber: number) => {
+    setCurrentPage(pageNumber)
+  }
+
+  const handleNextPage = () => {
+    setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages))
+  }
+
+  const handlePrevPage = () => {
+    setCurrentPage((prevPage) => Math.max(prevPage - 1, 1))
+  }
 
   const handleAddToCart = (product: Product) => {
     dispatch(addToCart(product))
@@ -61,6 +76,10 @@ const Home = () => {
   if (error) {
     return <h1>{error}</h1>
   }
+
+  const indexOfLastProduct = currentPage * productsPerPage
+  const indexOfFirstProduct = indexOfLastProduct - productsPerPage
+  const currentProducts = filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct)
 
   return (
     <div>
@@ -98,8 +117,8 @@ const Home = () => {
           ))}
         </div>
         <div className="grid">
-          {filteredProducts.length > 0 &&
-            filteredProducts.map((product: Product) => (
+          {currentProducts.length > 0 &&
+            currentProducts.map((product: Product) => (
               <div className="card" key={product.id}>
                 <Link to={`/product/${product.id}`}>
                   <img src={product.image} alt={product.name} />
@@ -108,17 +127,37 @@ const Home = () => {
                 <h3>{product.name}</h3>
                 <span>{product.description}</span>
                 <h2>${product.price}</h2>
-                <button
-                  onClick={() => {
-                    handleAddToCart(product)
-                  }}>
-                  Add to Cart
-                </button>
+                <button onClick={() => handleAddToCart(product)}>Add to Cart</button>
               </div>
             ))}
+          {currentProducts.length === 0 && <h2>No products found.</h2>}
+        </div>
+        <div className="pagination">
+          <button
+            disabled={currentPage === 1}
+            onClick={handlePrevPage}
+            className="pagination-button">
+            Previous
+          </button>
+          <div className="page-numbers">
+            {Array.from({ length: totalPages }, (_, index) => (
+              <button
+                key={index + 1}
+                className={`pagination-button ${currentPage === index + 1 ? 'active' : ''}`}
+                onClick={() => handlePageChange(index + 1)}>
+                {index + 1}
+              </button>
+            ))}
+          </div>
+          <button
+            disabled={currentPage === totalPages}
+            onClick={handleNextPage}
+            className="pagination-button">
+            Next
+          </button>
         </div>
       </div>
-      <ToastContainer />
+      <ToastContainer position="bottom-right" />
     </div>
   )
 }
