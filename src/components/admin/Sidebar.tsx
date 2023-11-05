@@ -36,6 +36,9 @@ const AdminSidebar = () => {
               <Link className="span" to="/dashboard/admin/userslist">
                 <li className="icon-users">Users</li>
               </Link>
+              <Link className="span" to="/dashboard/admin/orders">
+                <li className="icon-orders">Orders</li>
+              </Link>
             </>
           ) : (
             <Link className="span" to="/dashboard/user/orders">

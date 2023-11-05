@@ -9,7 +9,7 @@ import {
   updateCategory
 } from '../../redux/slices/categories/categorySlice'
 
-import AdminSidebar from './Sidebar'
+import Sidebar from './Sidebar'
 import { Table, Tbody, Td, Th, Thead, Tr } from 'react-super-responsive-table'
 
 const initialCategoryState: Category = {
@@ -75,7 +75,7 @@ const Categories = () => {
 
   return (
     <div className="container">
-      <AdminSidebar />
+      <Sidebar />
       <div className="sidebar-container">
         <h1 className="title">Categories</h1>
         <button className="floating-button" onClick={handleAddClick}>

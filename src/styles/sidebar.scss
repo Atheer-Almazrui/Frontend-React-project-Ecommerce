@@ -7,6 +7,7 @@ $menu-width-tablet: 90px;
 $icon-url-products: 'https://img.icons8.com/product.png';
 $icon-url-users: 'https://img.icons8.com/ios-glyphs/30/group.png';
 $icon-url-categories: 'https://img.icons8.com/ios-glyphs/30/category.png';
+$icon-url-orders: 'https://img.icons8.com/external-icongeek26-outline-icongeek26/64/external-box-logistics-delivery-icongeek26-outline-icongeek26.png';
 
 .container {
   display: flex;
@@ -16,27 +17,11 @@ $icon-url-categories: 'https://img.icons8.com/ios-glyphs/30/category.png';
   position: fixed;
   z-index: 2;
   top: 5rem;
-  // background-color: rgb(84, 68, 94);
-  // background: linear-gradient(300deg, #5c5c5c, #0e3157, #7ba5c9);
-  // background-size: 180% 180%;
-  // animation: body 3s ease infinite;
-
-  // @keyframes container {
-  //   0% {
-  //     background-position: 0% 50%;
-  //   }
-  //   50% {
-  //     background-position: 100% 50%;
-  //   }
-  //   100% {
-  //     background-position: 0% 50%;
-  //   }
-  // }
 }
 
 .sidebar-body {
   margin-top: 8rem;
-  height: 60vh;
+  height: 65vh;
   color: #000;
   background: rgb(255, 255, 255);
   border-radius: 50px;
@@ -107,6 +92,9 @@ $icon-url-categories: 'https://img.icons8.com/ios-glyphs/30/category.png';
         &.icon-categories {
           background-image: url($icon-url-categories);
         }
+        &.icon-orders {
+          background-image: url($icon-url-orders);
+        }
         &:hover {
           background-color: rgba(0, 0, 0, 0.1);
         }
@@ -138,7 +126,8 @@ $icon-url-categories: 'https://img.icons8.com/ios-glyphs/30/category.png';
           width: $menu-width-tablet - 30px;
         }
 
-        h2, h4 {
+        h2,
+        h4 {
           opacity: 0;
           position: absolute;
         }

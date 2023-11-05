@@ -11,6 +11,7 @@ import Products from '../components/admin/Products'
 import AdminProfile from '../components/admin/AdminProfile'
 import Categories from '../components/admin/Categories'
 import UsersList from '../components/admin/UsersList'
+import Orders from '../components/admin/Orders'
 import UserProfile from '../components/user/UserProfile'
 
 import ProtectedRoute from './ProtectedRoute'
@@ -37,6 +38,7 @@ const Index = () => {
           <Route path="admin/categories" element={<Categories />} />
           <Route path="admin/products" element={<Products />} />
           <Route path="admin/userslist" element={<UsersList />} />
+          <Route path="admin/orders" element={<Orders />} />
         </Route>
       </Routes>
     </BrowserRouter>

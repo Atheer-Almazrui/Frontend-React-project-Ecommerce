@@ -13,7 +13,7 @@ import {
 } from '../../redux/slices/products/productSlice'
 import { AppDispatch, RootState } from '../../redux/store'
 
-import AdminSidebar from './Sidebar'
+import Sidebar from './Sidebar'
 import '../../styles/adminOperations.scss'
 
 const initialProductState: Product = {
@@ -118,7 +118,7 @@ const Products = () => {
 
   return (
     <div className="container">
-      <AdminSidebar />
+      <Sidebar />
       <div className="sidebar-container">
         <h1 className="title">Products</h1>
         <button className="floating-button" onClick={handleAddClick}>
