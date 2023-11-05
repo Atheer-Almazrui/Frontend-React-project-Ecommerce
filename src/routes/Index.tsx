@@ -13,6 +13,7 @@ import Categories from '../components/admin/Categories'
 import UsersList from '../components/admin/UsersList'
 import Orders from '../components/admin/Orders'
 import UserProfile from '../components/user/UserProfile'
+import Footer from '../components/Footer'
 
 import ProtectedRoute from './ProtectedRoute'
 import AdminRoute from './AdminRoute'
@@ -41,6 +42,7 @@ const Index = () => {
           <Route path="admin/orders" element={<Orders />} />
         </Route>
       </Routes>
+      <Footer />
     </BrowserRouter>
   )
 }
