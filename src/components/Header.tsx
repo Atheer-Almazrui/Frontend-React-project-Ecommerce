@@ -9,8 +9,11 @@ import '../styles/header.scss'
 
 const Header = () => {
   const dispatch = useDispatch<AppDispatch>()
-  const { isLoggedIn, userData } = useSelector((state: RootState) => state.users)
   const navigate = useNavigate()
+
+  const { isLoggedIn, userData } = useSelector((state: RootState) => state.users)
+  const { cartItems } = useSelector((state: RootState) => state.cart)
+
   const [isNavExpanded, setIsNavExpanded] = useState(false)
 
   return (
@@ -77,7 +80,20 @@ const Header = () => {
                     </Link>
                   </li>
                 )}
-
+                {/* the following code is to hide the cart icon if he is an admin, otherwies display the cart */}
+                {userData?.role !== 'admin' && (
+                  <li
+                    onClick={() => {
+                      setIsNavExpanded(false)
+                      // dispatch(logout())
+                      navigate('/cart')
+                    }}>
+                    <i className="fa fa-shopping-cart fa-xl cart">
+                      {cartItems.length > 0 && <span>{cartItems.length}</span>}
+                    </i>
+                    {/* fa-2xl  larger cart */}
+                  </li>
+                )}
                 <li
                   className="nav-link hamburger-link"
                   onClick={() => {
@@ -113,15 +129,6 @@ const Header = () => {
                   </Link>
                 </li>
               </>
-            )}
-            {/* the following code is to hide the cart icon if he is an admin, otherwies display the cart */}
-            {userData?.role !== 'admin' && (
-              <li>
-                <i className="fa fa-shopping-cart fa-xl cart">
-                  <span>1</span>
-                </i>
-                {/* fa-2xl  larger cart */}
-              </li>
             )}
           </ul>
         </div>

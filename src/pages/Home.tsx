@@ -1,12 +1,15 @@
 import { ChangeEvent, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 import { Product, searchProductByName, sortProducts } from '../redux/slices/products/productSlice'
 import { AppDispatch, RootState } from '../redux/store'
 
 import HeroSection from '../components/HeroSection'
 import '../styles/home.scss'
+import { addToCart } from '../redux/slices/cart/cartSlice'
 
 const Home = () => {
   const dispatch = useDispatch<AppDispatch>()
@@ -46,6 +49,11 @@ const Home = () => {
           product.categories.some((category) => selectedCategories.includes(category))
         )
       : searchedProducts
+
+  const handleAddToCart = (product: Product) => {
+    dispatch(addToCart(product))
+    toast.success('Item added to cart ✨🛒')
+  }
 
   if (isLoading) {
     return <h1>Products are loading...</h1>
@@ -100,11 +108,17 @@ const Home = () => {
                 <h3>{product.name}</h3>
                 <span>{product.description}</span>
                 <h2>${product.price}</h2>
-                <button>Add to Cart</button>
+                <button
+                  onClick={() => {
+                    handleAddToCart(product)
+                  }}>
+                  Add to Cart
+                </button>
               </div>
             ))}
         </div>
       </div>
+      <ToastContainer />
     </div>
   )
 }

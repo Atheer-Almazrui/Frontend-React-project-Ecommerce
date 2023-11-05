@@ -4,7 +4,7 @@ import Home from '../pages/Home'
 import Login from '../pages/Login'
 import Signup from '../pages/Signup'
 import ProductDetails from '../pages/ProductDetails'
-import Error from '../pages/Error'
+import Cart from '../pages/Cart'
 
 import Header from '../components/Header'
 import Products from '../components/admin/Products'
@@ -26,7 +26,7 @@ const Index = () => {
         <Route path="/login" element={<Login pathName={''} />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/product/:id" element={<ProductDetails />} />
-        <Route path="*" element={<Error />} />
+        <Route path="/cart" element={<Cart />} />
 
         <Route path="/dashboard" element={<ProtectedRoute />}>
           <Route path="user/profile" element={<UserProfile />} />
