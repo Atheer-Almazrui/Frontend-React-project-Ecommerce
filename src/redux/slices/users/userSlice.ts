@@ -62,6 +62,7 @@ export const userSlice = createSlice({
           userData: state.userData
         })
       )
+      // localStorage.removeItem('cart')
     },
     logout: (state) => {
       state.isLoggedIn = false
